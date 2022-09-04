@@ -6,13 +6,7 @@ export default function PokeFinder({ pokedata }) {
   }
 
   return (
-    <div className="bg-black text-white w-full min-h-[100vh] h-fit text-center">
-      <button
-        onClick={logdata}
-        className="bg-white rounded md text-black p-2 m-2"
-      >
-        Click me!
-      </button>
+    <div className="text-white w-full h-fit text-center container mx-auto">
       {pokedata.length !== 0 && (
         <div className="flex flex-wrap justify-center">
           {pokedata.map((pokemon) => (
@@ -20,6 +14,7 @@ export default function PokeFinder({ pokedata }) {
               key={pokemon.name}
               name={pokemon.name}
               image={pokemon.sprites.front_default}
+              types={pokemon.types}
             />
           ))}
         </div>
