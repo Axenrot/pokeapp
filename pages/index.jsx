@@ -6,7 +6,7 @@ import Head from "next/head";
 
 export async function getServerSideProps() {
   let pokedata = [];
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 20; i++) {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
     pokedata.push(response.data);
   }
