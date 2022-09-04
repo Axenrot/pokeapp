@@ -23,7 +23,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        pokebg: "url('/images/background.jpg')",
+        pokebg: "url('/images/background2.jpg')",
+        gengarbg: "url('/images/gengarbg.webp')",
       },
       colors: {
         blackborder: "#0E0E0E",
