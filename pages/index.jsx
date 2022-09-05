@@ -68,13 +68,6 @@ export default function Home() {
         <Search types={types} getFilteredData={getFilteredData} />
       )}
 
-      <button
-        className="bg-white text-black p-2 ml-[50%] rounded-md -translate-x-[50%]"
-        onClick={() => console.log("hello")}
-      >
-        Console Log ""
-      </button>
-
       {loading && (
         <div className="text-white text-center text-[60px]">Loading...</div>
       )}
