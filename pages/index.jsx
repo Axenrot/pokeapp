@@ -69,7 +69,11 @@ export default function Home() {
       )}
 
       {loading && (
-        <div className="text-white text-center text-[60px]">Loading...</div>
+        <img
+          src="images/gengar.gif"
+          alt="Loading"
+          className="w-1/4 mx-auto pt-5"
+        />
       )}
       {!loading && <PokeFinder pokeData={pokeData} />}
     </Background>
