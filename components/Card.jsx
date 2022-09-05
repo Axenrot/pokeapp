@@ -1,10 +1,10 @@
 const Card = ({ image, name, types }) => {
   return (
-    <div className="m-1 flex p-4 w-[250px] bg-pokebg rounded-md border border-white bg-opacity-10 bg-cover">
+    <div className="m-1 flex flex-col sm:flex-row p-4 w-[40%] sm:w-[250px] bg-pokebg rounded-md border border-white bg-opacity-10 bg-cover">
       <img
         src={image}
         alt={name}
-        className="transition-all duration-200 scale-150 hover:opacity-90 hover:scale-[1.6]"
+        className="transition-all duration-200 scale-125 hover:scale-[1.35] sm:scale-150 hover:opacity-90 sm:hover:scale-[1.6]"
       />
 
       <div className="flex flex-col self-center">
