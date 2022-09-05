@@ -72,7 +72,7 @@ export default function Home() {
         <img
           src="images/gengar.gif"
           alt="Loading"
-          className="w-1/4 mx-auto pt-5"
+          className="sm:w-[50%] lg:w-[30%] mx-auto pt-5"
         />
       )}
       {!loading && <PokeFinder pokeData={pokeData} />}
