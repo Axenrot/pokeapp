@@ -8,12 +8,12 @@ import axios from "axios";
 export default function Home() {
   const [pokeData, setPokeData] = useState([]);
   const [types, setTypes] = useState([]);
+  const [type, setType] = useState("");
   const [check, setCheck] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  async function getData() {
+  async function getTypes() {
     let typesGetter = [];
-    let pokeDataGetter = [];
     await axios
       .get("https://pokeapi.co/api/v2/type/")
       .then((response) =>
@@ -23,33 +23,55 @@ export default function Home() {
         typesGetter.pop();
         typesGetter.pop();
       })
-      .then(async () => {
-        for (let i = 1; i <= 20; i++) {
-          const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
-          pokeDataGetter.push(res.data);
-        }
-      })
-      .then(() => {
-        setTypes(typesGetter);
-        setPokeData(pokeDataGetter);
-        setLoading(false);
-        setCheck(false);
-      });
+      .then(setTypes(typesGetter));
+  }
+
+  async function getData() {
+    let pokeDataGetter = [];
+
+    for (let i = 1; i <= 20; i++) {
+      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
+      pokeDataGetter.push(res.data);
+    }
+
+    setPokeData(pokeDataGetter);
+    setLoading(false);
+  }
+
+  async function getFilteredData(type) {
+    let pokemonList = [];
+    setLoading(true);
+
+    const res = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
+
+    for (let i = 0; i < res.data.pokemon.length; i++) {
+      const r = await axios.get(res.data.pokemon[i].pokemon.url);
+      pokemonList.push(r.data);
+    }
+    setPokeData(pokemonList);
+    setLoading(false);
   }
 
   if (check) {
+    getTypes();
     getData();
+    setCheck(false);
   }
+
   return (
     <Background>
       <Head>
         <title>PokéApp</title>
       </Head>
+
+      {types.length > 0 && (
+        <Search types={types} getFilteredData={getFilteredData} />
+      )}
+
       {loading && (
         <div className="text-white text-center text-[60px]">Loading...</div>
       )}
-      {!loading && <Search types={types} />}
-      {!loading && <PokeFinder pokedata={pokeData} />}
+      {!loading && <PokeFinder pokeData={pokeData} />}
     </Background>
   );
 }
